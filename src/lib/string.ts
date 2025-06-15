@@ -113,25 +113,22 @@ export function pluralize(word: string): string {
     crisis: 'crises'
   };
 
-  // Handle irregulars
   if (irregulars[lower]) {
     const plural = irregulars[lower];
     return preserveCasing(word, lower, plural);
   }
 
-  // y → ies
   if (word.match(/[^aeiou]y$/i)) {
     return word.slice(0, -1) + 'ies';
   }
 
-  // s, x, z, ch, sh → es
-  if (word.match(/(s|x|z|ch|sh)$/i)) {
+  if (word.length > 1 && word.match(/(s|x|z|ch|sh)$/i)) {
     return word + 'es';
   }
 
-  // Default: just add 's'
   return word + 's';
 }
+
 
 /**
  * Copies the casing of `source` onto `target`, from the start.
