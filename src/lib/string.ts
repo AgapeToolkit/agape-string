@@ -1,69 +1,71 @@
 
 /**
- * Returns a string formatted in camel case. 
- * @param string A string to be returned as a class name
+ * Converts a string to camelCase.
+ * Removes all non-alphanumeric separators and capitalizes each word except the first.
+ *
+ * @param input The input string to be camelized.
  */
-export function camelize(string: string) {
-  return string
-    .replace(/[-_]/, ' ')
-    .replace(/(\w)([a-z]+)/g , (str, left, right) => { return left.toUpperCase() + right } )
-    .replace(/[^A-Za-z0-9]/, '')
-    .replace(/^([A-Z])/, (str) => { return str.toLowerCase() } )
+export function camelize(input: string): string {
+  return input
+    .replace(/[^A-Za-z0-9]+/g, ' ')
+    .trim()
+    .split(' ')
+    .map((word, index) => {
+      if (index === 0) return word.toLowerCase();
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join('');
 }
 
 /**
- * Returns a string formatted as a token. Removes all symbols and replaces
- * spaces and punctuation with dashes.
+ * Converts a string to kebab-case.
+ * Replaces spaces, underscores, and camelCase transitions with dashes,
+ * removes special characters, and lowercases the result.
+ *
+ * @param input A string to be converted to kebab-case.
+ */
+export function kebabify(input: string): string {
+  return input
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')           // camelCase → camel-Case
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')         // XMLHttp → XML-Http
+    .replace(/[_\s]+/g, '-')                          // underscores/spaces → dash
+    .replace(/[^a-zA-Z0-9\-]+/g, '')                  // remove symbols except dash
+    .replace(/--+/g, '-')                             // collapse multiple dashes
+    .replace(/^-+|-+$/g, '')                          // trim starting/trailing dash
+    .toLowerCase();
+}
+
+/**
+ * Returns a string formatted as spoken words.
+ * Adds spaces between words in camelCase, PascalCase, snake_case, or kebab-case identifiers.
+ * Capitalizes the first word only.
  * 
- * @param string A string to be returned as a token
+ * @param input A string to be returned as spoken words.
  */
-export function kebabify(string: string) {
-  return string
-    .replace(/[^A-Za-z0-9\s\-_]/g, '')
-    .replace(/(.)([A-Z][a-z]+)/g , (str, left, right) => { return left + '-' + right } )
-    .replace(/([a-z0-9])([A-Z])/g, (str, left, right) => { return left + '-' + right } )
-    .replace(/[_\s]+-?/, '-')
-    .toLowerCase()
+export function verbalize(input: string): string {
+  return input
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')       // camelCase → camel Case
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')     // XMLHttp → XML Http
+    .replace(/[-_]+/g, ' ')                       // kebab-case and snake_case → space
+    .replace(/\s+/g, ' ')                         // collapse extra spaces
+    .trim()
+    .replace(/^([a-z])/, (match) => match.toUpperCase()); // Capitalize first letter
 }
 
 /**
- * Returns a string formatted as spoken words. Adds spaces between words,
- * replacing underscores and hyphens.
- * @param string A string to be returned as spoken words
+ * Converts a string to PascalCase.
+ * Removes non-alphanumeric characters, capitalizes each word, and strips leading numbers.
+ *
+ * @param input A string to be returned in PascalCase.
  */
-export function verbalize(string: string) {
-  return string
-    .replace(/(.)([A-Z][a-z]+)/g , (str, left, right) => { return left + ' ' + right } )
-    .replace(/([a-z0-9])([A-Z])/g, (str, left, right) => { return left + ' ' + right } )
-    .replace(/[-_]/, ' ')
-    .replace(/^([a-z])/, (str) => { return str.toUpperCase() } )
-}
-
-/**
- * Returns a string formatted as a label. Adds spaces between words,
- * replacing underscores and hyphens, capitalize the first word.
- * @param string A string to be returned as spoken words
- */
-export function labelize(string: string) {
-  return string
-    .replace(/(.)([A-Z][a-z]+)/g , (str, left, right) => { return left + ' ' + right } )
-    .replace(/([a-z0-9])([A-Z])/g, (str, left, right) => { return left + ' ' + right } )
-    .replace(/[-_]/, ' ')
-    .toLocaleLowerCase()
-    .replace(/^([a-z])/, (str) => { return str.toUpperCase() } )
-}
-
-/**
- * Returns a string formatted as a class name. Removes all spaces and symbols,
- * captializes the first letter of each word.
- * @param string A string to be returned in pascal case
- */
-export function pascalize(string: string) {
-  return string
-    .replace(/[-_]/, ' ')
-    .replace(/(\w)([a-z]+)/g , (str, left, right) => { return left.toUpperCase() + right } )
-    .replace(/[^A-Za-z0-9]/, '')
-    .replace(/^[0-9]+/, '')
+export function pascalize(input: string): string {
+  return input
+    .replace(/[^A-Za-z0-9]+/g, ' ')                    // normalize separators
+    .replace(/^\d+\s*/, '')                            // remove leading digits
+    .trim()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('');
 }
 
 /**
@@ -212,39 +214,40 @@ export function singularize(word: string): string {
  * one count.
  * @param count Number of units
  * @param unit Label for the value
- * @param plural Set to false to disable pluralization
+ * @param plural Plural label for the value, will pluralize the single unit if
+ *               not provided
  * @returns String in `x units` format
  */
-export function quanitfy(count: number|string, unit: string, pluralize = true) {
+export function quanitfy(count: number|string, unit: string, plural?: string) {
   const value = typeof count == 'number' ? count : Number(count);
   
-  const label = pluralize === false || value === 1 ? unit : _pluralize(unit);
+  const label = value === 1 ? unit : plural === undefined ? pluralize(unit) : plural;
   
   return `${count} ${label}`
 
 }
 
 /**
- * Formats a string in it's labels form. Most strings a returned
- * with an 's' appended to the end. For strings that end with 'y',
- * the 'y' is replaced with 'ies'. Strings that end with 'us', the
- * 'us' is replaced with 'i'.
- * @param string String to be returned in labels form
+ * Converts a string to title case.
+ * Capitalizes the first letter of each word, except for small words (e.g., "of", "and")
+ * unless they appear at the beginning.
+ *
+ * @param input The string to be converted to title case.
  */
-export function titalize(string: string) {
-  return string
-    .replace(/(^|\s)([a-z])/g , (str, left, right) => { return left + right.toUpperCase() } )
-    .replace(/(?!^)\b(The)\b/, 'the')
-    .replace(/(?!^)\b(Of)\b/, 'of')
-    .replace(/(?!^)\b(In)\b/, 'in')
-    .replace(/(?!^)\b(On)\b/, 'on')
-    .replace(/(?!^)\b(A)\b/, 'a')
-    .replace(/(?!^)\b(An)\b/, 'an')
-    .replace(/(?!^)\b(And)\b/, 'and')
-    .replace(/(?!^)\b(At)\b/, 'at')
-    .replace(/(?!^)\b(By)\b/, 'by')
-    .replace(/(?!^)\b(Be)\b/, 'be')
-    .replace(/(?!^)\b(To)\b/, 'to')
-    .replace(/(?!^)\b(But)\b/, 'but')
-    .replace(/(?!^)\b(For)\b/, 'for')
+export function titalize(input: string): string {
+  const smallWords = new Set([
+    'a', 'an', 'and', 'at', 'be', 'but', 'by', 'for',
+    'in', 'of', 'on', 'the', 'to'
+  ]);
+
+  return input
+    .toLowerCase()
+    .split(/\s+/)
+    .map((word, index) => {
+      if (index === 0 || !smallWords.has(word)) {
+        return word[0].toUpperCase() + word.slice(1);
+      }
+      return word;
+    })
+    .join(' ');
 }
