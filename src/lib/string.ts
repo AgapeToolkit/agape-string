@@ -72,12 +72,6 @@ export function pascalize(input: string): string {
     .trim()
     .split(/\s+/);
 
-  console.log(">>>>>", input, ">>>>>>", parts.join(', '), ">>>>>>>", parts
-  .map((word, index) => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  })
-  .join(''))
-
   return parts
     .map((word, index) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
