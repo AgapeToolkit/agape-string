@@ -1,0 +1,77 @@
+{
+  "name": "string",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/string/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/string",
+        "main": "libs/string/src/index.ts",
+        "tsConfig": "libs/string/tsconfig.lib.json",
+        "assets": ["libs/string/*.md"]
+      }
+    },
+    "buildcjs": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/string/cjs.in",
+        "main": "libs/string/src/index.ts",
+        "tsConfig": "libs/string/tsconfig.cjs.json",
+        "assets": ["libs/string/*.md"]
+      }
+    },
+    "buildes2020": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/string/es2020.in",
+        "main": "libs/string/src/index.ts",
+        "tsConfig": "libs/string/tsconfig.es2020.json",
+        "assets": ["libs/string/*.md"]
+      }
+    },
+    "buildes2015": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/string/es2015.in",
+        "main": "libs/string/src/index.ts",
+        "tsConfig": "libs/string/tsconfig.es2015.json",
+        "assets": ["libs/string/*.md"]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs string {args.ver} {args.tag}"
+      },
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/string/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/string/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
