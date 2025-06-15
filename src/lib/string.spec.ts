@@ -1,19 +1,124 @@
 import { camelize, kebabify, verbalize, pascalize, pluralize, titalize, quanitfy } from './string'
 
 describe('camelize', () => {
-  it('should camelize a string', () => {
-    expect( camelize('foo bar') ).toEqual('fooBar')
-  })
-})
+  it('should convert space-separated words to camelCase', () => {
+    expect(camelize('first name')).toEqual('firstName');
+    expect(camelize('user profile id')).toEqual('userProfileId');
+  });
+
+  it('should convert hyphenated words to camelCase', () => {
+    expect(camelize('first-name')).toEqual('firstName');
+    expect(camelize('user-profile-id')).toEqual('userProfileId');
+  });
+
+  it('should convert snake_case to camelCase', () => {
+    expect(camelize('first_name')).toEqual('firstName');
+    expect(camelize('user_profile_id')).toEqual('userProfileId');
+  });
+
+  it('should handle mixed delimiters', () => {
+    expect(camelize('user-profile_id')).toEqual('userProfileId');
+    expect(camelize('user profile_id-name')).toEqual('userProfileIdName');
+  });
+
+  it('should lowercase the first character', () => {
+    expect(camelize('First Name')).toEqual('firstName');
+    expect(camelize('API Response')).toEqual('apiResponse');
+  });
+
+  it('should remove non-alphanumeric characters', () => {
+    expect(camelize('user@name!')).toEqual('userName');
+    expect(camelize('hello.world')).toEqual('helloWorld');
+  });
+
+  it('should handle numbers correctly', () => {
+    expect(camelize('version 2 id')).toEqual('version2Id');
+    expect(camelize('api_2_response')).toEqual('api2Response');
+  });
+
+  it('should return empty string for empty input', () => {
+    expect(camelize('')).toEqual('');
+  });
+
+  it('should not change already camelCased input', () => {
+    expect(camelize('alreadyCamelCase')).toEqual('alreadyCamelCase');
+  });
+
+  it('should handle a single word', () => {
+    expect(camelize('username')).toEqual('username');
+    expect(camelize('Username')).toEqual('username');
+  });
+});
 
 describe('pascalize', () => {
-  it('should classify a string', () => {
-    expect( pascalize('foo bar') ).toEqual('FooBar')
-  })
-  it('should classify a token', () => {
-    expect( pascalize('foo-bar') ).toEqual('FooBar')
-  })
-})
+  it('should convert space-separated words to PascalCase', () => {
+    expect(pascalize('first name')).toEqual('FirstName');
+    expect(pascalize('api response')).toEqual('ApiResponse');
+  });
+
+  it('should convert kebab-case to PascalCase', () => {
+    expect(pascalize('user-profile')).toEqual('UserProfile');
+    expect(pascalize('api-response-code')).toEqual('ApiResponseCode');
+  });
+
+  it('should convert snake_case to PascalCase', () => {
+    expect(pascalize('user_profile')).toEqual('UserProfile');
+    expect(pascalize('api_response_code')).toEqual('ApiResponseCode');
+  });
+
+  it('should convert mixed delimiters to PascalCase', () => {
+    expect(pascalize('user_profile-id')).toEqual('UserProfileId');
+    expect(pascalize('user profile-id_name')).toEqual('UserProfileIdName');
+  });
+
+  it('should remove non-alphanumeric characters', () => {
+    expect(pascalize('foo@bar!baz')).toEqual('FooBarBaz');
+    expect(pascalize('hello.world')).toEqual('HelloWorld');
+    expect(pascalize('this#is$clean')).toEqual('ThisIsClean');
+  });
+
+  it('should preserve numeric prefix', () => {
+    expect(pascalize('123foo bar')).toEqual('123FooBar');
+    expect(pascalize('456-api-response')).toEqual('456ApiResponse');
+  });
+
+  it('should retain numbers elsewhere in the string', () => {
+    expect(pascalize('version 2')).toEqual('Version2');
+    expect(pascalize('item_404')).toEqual('Item404');
+    expect(pascalize('response code 500')).toEqual('ResponseCode500');
+  });
+
+  it('should preserve clean PascalCase input', () => {
+    expect(pascalize('UserProfile')).toEqual('UserProfile');
+    expect(pascalize('XMLHttpRequest')).toEqual('XMLHttpRequest');
+  });
+
+  it('should capitalize the first letter of lowercase words', () => {
+    expect(pascalize('username')).toEqual('Username');
+    expect(pascalize('profile')).toEqual('Profile');
+  });
+
+  it('should trim and clean excess whitespace', () => {
+    expect(pascalize('  user   profile  ')).toEqual('UserProfile');
+    expect(pascalize('\t api \n response')).toEqual('ApiResponse');
+  });
+
+  it('should return empty string for empty input', () => {
+    expect(pascalize('')).toEqual('');
+    expect(pascalize('   ')).toEqual('');
+  });
+
+  it('should not break on single-character input', () => {
+    expect(pascalize('x')).toEqual('X');
+    expect(pascalize('X')).toEqual('X');
+  });
+
+  it('should not alter valid all-digit strings except trimming', () => {
+    expect(pascalize('123')).toEqual('123');
+    expect(pascalize('   123   ')).toEqual('123');
+  });
+});
+
 
 describe('pluralize', () => {
 

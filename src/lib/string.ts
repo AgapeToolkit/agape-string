@@ -6,16 +6,21 @@
  * @param input The input string to be camelized.
  */
 export function camelize(input: string): string {
-  return input
-    .replace(/[^A-Za-z0-9]+/g, ' ')
+  const parts = input
+    .replace(/[^A-Za-z0-9]+/g, ' ')                        // normalize delimiters
+    .replace(/([a-z])([A-Z])/g, '$1 $2')                   // split camelCase
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')             // split acronyms like "HTMLParser"
     .trim()
-    .split(' ')
+    .split(/\s+/);                                         // split by space
+
+  return parts
     .map((word, index) => {
       if (index === 0) return word.toLowerCase();
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
     .join('');
 }
+
 
 /**
  * Converts a string to kebab-case.
@@ -59,12 +64,24 @@ export function verbalize(input: string): string {
  * @param input A string to be returned in PascalCase.
  */
 export function pascalize(input: string): string {
-  return input
-    .replace(/[^A-Za-z0-9]+/g, ' ')                    // normalize separators
-    .replace(/^\d+\s*/, '')                            // remove leading digits
+  const parts = input
+    .replace(/[^A-Za-z0-9]+/g, ' ')
+    .replace(/([0-9])([A-Za-z])/g, '$1 $2')     // digit → letter
+    .replace(/([A-Za-z])([0-9])/g, '$1 $2')     // letter → digit
+    .replace(/([A-Z])/g, ' $1')                 // split every capital letter
     .trim()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .split(/\s+/);
+
+  console.log(">>>>>", input, ">>>>>>", parts.join(', '), ">>>>>>>", parts
+  .map((word, index) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  })
+  .join(''))
+
+  return parts
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join('');
 }
 
