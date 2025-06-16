@@ -7,11 +7,12 @@
  */
 export function camelize(input: string): string {
   const parts = input
-    .replace(/[^A-Za-z0-9]+/g, ' ')                        // normalize delimiters
-    .replace(/([a-z])([A-Z])/g, '$1 $2')                   // split camelCase
-    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')             // split acronyms like "HTMLParser"
+    .replace(/[^A-Za-z0-9]+/g, ' ')
+    .replace(/([0-9])([A-Za-z])/g, '$1 $2')     // digit → letter
+    .replace(/([A-Za-z])([0-9])/g, '$1 $2')     // letter → digit
+    .replace(/([A-Z])/g, ' $1')                 // split every capital letter
     .trim()
-    .split(/\s+/);                                         // split by space
+    .split(/\s+/);
 
   return parts
     .map((word, index) => {
@@ -128,7 +129,6 @@ export function pluralize(word: string): string {
 
   return word + 's';
 }
-
 
 /**
  * Copies the casing of `source` onto `target`, from the start.
@@ -249,13 +249,20 @@ export function titalize(input: string): string {
   ]);
 
   return input
-    .toLowerCase()
+    .trim()
     .split(/\s+/)
-    .map((word, index) => {
-      if (index === 0 || !smallWords.has(word)) {
+    .filter(word => word.length)
+    .map(
+      (word, index) => {
+        const lowercased = word.toLowerCase();
+        if (/[A-Z]/.test(word)) {
+          return word;
+        }
+        if (smallWords.has(lowercased) && index != 0) {
+          return lowercased;
+        }
         return word[0].toUpperCase() + word.slice(1);
       }
-      return word;
-    })
+    )
     .join(' ');
 }
