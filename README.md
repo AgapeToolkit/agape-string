@@ -11,20 +11,30 @@ import {
     pascalize, 
     pluralize, 
     titalize, 
-    verbalize 
+    verbalize,
+    quantify
 } from '@agape/string'
 
-camelize('foo bar')      // fooBar
+camelize('user name')          // userName
+camelize('email-address')      // emailAddress
 
-kebabify('Foo bar')      // foo-bar
+kebabify('Display Name')       // display-name
+kebabify('userProfileId')      // user-profile-id
 
-pascalize('Foo bar')      // FooBar
+pascalize('user id')           // UserId
+pascalize('api_response_code') // ApiResponseCode
 
-pluralize('foo')         // foos
+pluralize('city')              // cities
+pluralize('analysis')          // analyses
 
-titalize('a foo a bar')  // A Foo a Bar
+quantify(1, 'item')            // 1 item
+quantify(3, 'box')             // 3 boxes
 
-verbalize('foo-bar')     // Foo bar
+titalize('the lord of the rings')  // The Lord of the Rings
+titalize('war and peace')          // War and Peace
+
+verbalize('user-profile-id')   // User profile id
+verbalize('XMLHttpRequest')    // XML Http Request
 ```
 
 ## Description
@@ -33,31 +43,35 @@ Translate strings between different representations.
 
 ## Functions
 
-`camelize`
+`camelize(input: string)`
 
 Convert to camel case.
 
-`kebabify`
+`kebabify(input: string)`
 
 Converted to kebab-case: lower case, word boundaries replaced with dashes. 
 
-`pascalize`
+`pascalize(input: string)`
 
 Remove all symbols and spaces, captialize words.
 
-`pluralize`
+`pluralize(input: string)`
 
 Adds an 's' to most words. Words that end in 'y' are changed to 'ies'. 
 Words that end in s have 'es' appended to the word.
 
-`titalize`
+`quantify(value: number, unit: string, plural?: string)`
+
+The value will be paired with the unit, either singular or plural form
+
+`titalize(input: number)`
 
 The first letter of each word is capitalized with the exception of
 `a, an, and, at, be, but, by, for, if, in, of, on, the, to` which are only 
 capitalized if they are the first word in the string, otherwise they 
 are converted to lowercase.
 
-`verbalize`
+`verbalize(input: number)`
 
 First character capitalized, word boundaries replaced with spaces.
 
