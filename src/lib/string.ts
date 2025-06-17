@@ -48,7 +48,7 @@ export function kebabify(input: string): string {
     .replace(/([0-9])([a-zA-Z])/g, '$1-$2')          // digit-letter
     .replace(/_/g, '-')                              // underscore → dash (1:1)
     .replace(/\s+/g, '-')                            // spaces → dash
-    .replace(new RegExp(`[^a-zA-Z0-9\-${PLACEHOLDER}]+`, 'g'), '-') // symbols → dash
+    .replace(new RegExp(`[^a-zA-Z0-9-${PLACEHOLDER}]+`, 'g'), '-') // symbols → dash
     .replace(/^-+|-+$/g, '')                         // trim dashes
     .toLowerCase();
 
@@ -121,7 +121,7 @@ export function pascalize(input: string): string {
     .split(/\s+/);
 
   return parts
-    .map((word, index) => {
+    .map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
     .join('');
@@ -203,11 +203,6 @@ function preserveCasing(source: string, sourceLower: string, target: string): st
 
   return result;
 }
-
-
-// define a file-level copy of the pluralize function so that the quanitfy
-// function can have a `pluralize` attribute and still use `_pluralize`
-const _pluralize = pluralize;
 
 /**
  * Returns the singular form of a plural word.

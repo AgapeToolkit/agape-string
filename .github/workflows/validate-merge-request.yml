@@ -24,6 +24,18 @@ jobs:
           git clone --recurse-submodules git@github.com:AgapeToolkit/AgapeToolkit.git ../AgapeToolkit
           cd ../AgapeToolkit
 
+          # Try to switch top-level AgapeToolkit repo to matching branch
+          echo "🔍 Checking if top-level repo has branch: ${{ steps.extract_branch.outputs.branch }}"
+          git fetch origin
+          if git rev-parse --verify origin/${{ steps.extract_branch.outputs.branch }} >/dev/null 2>&1; then
+            echo "✅ Switching top-level repo to branch ${{ steps.extract_branch.outputs.branch }}"
+            git checkout ${{ steps.extract_branch.outputs.branch }}
+            git pull origin ${{ steps.extract_branch.outputs.branch }}
+          else
+            echo "🛑 No matching branch in top-level repo — leaving default"
+          fi
+
+          # Now handle submodules
           git submodule foreach --quiet --recursive '
             echo "🔍 Checking submodule: $name"
             if [ "$name" = "libs/string" ]; then
@@ -54,6 +66,10 @@ jobs:
       - name: Install monorepo dependencies
         working-directory: ../AgapeToolkit
         run: npm ci
+
+      - name: Run lint for @agape/string
+        working-directory: ../AgapeToolkit
+        run: npx nx lint string
 
       - name: Run tests for @agape/string
         working-directory: ../AgapeToolkit
