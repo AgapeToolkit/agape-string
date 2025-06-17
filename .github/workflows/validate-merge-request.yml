@@ -24,23 +24,14 @@ jobs:
           git clone --recurse-submodules git@github.com:AgapeToolkit/AgapeToolkit.git ../AgapeToolkit
           cd ../AgapeToolkit
 
-          # Loop over all submodules and optionally switch branches
-          git submodule foreach --recursive '
+          git submodule foreach --quiet --recursive '
             echo "🔍 Checking submodule: $name"
-
-            # Skip if this is the current submodule
-            if [[ "$name" == "libs/string" ]]; then
+            if [ "$name" = "libs/string" ]; then
               echo "⚠️ Skipping $name (current module)"
               exit 0
             fi
-
-            # Go to the submodule directory
             cd "$toplevel/$name"
-
-            # Fetch branches
             git fetch origin
-
-            # Check if matching branch exists
             if git rev-parse --verify origin/${{ steps.extract_branch.outputs.branch }} >/dev/null 2>&1; then
               echo "✅ Switching $name to branch ${{ steps.extract_branch.outputs.branch }}"
               git checkout ${{ steps.extract_branch.outputs.branch }}
@@ -49,7 +40,6 @@ jobs:
               echo "🛑 No matching branch in $name — leaving on default"
             fi
           '
-
 
       - name: Replace string code in monorepo
         run: |
