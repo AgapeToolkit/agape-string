@@ -1,35 +1,65 @@
-name: Validate Merge Request
+name: Validate @agape/string in monorepo context
 
 on:
   pull_request:
 
 jobs:
   test:
-    name: Nx Unit Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout agape-string (this repo)
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_HEAD_REF}" >> $GITHUB_OUTPUT
+
+      - name: Clone AgapeToolkit monorepo (with submodules)
+        run: |
+          git clone --recurse-submodules https://github.com/AgapeToolkit/AgapeToolkit.git ../AgapeToolkit
+          cd ../AgapeToolkit
+
+          # Loop over all submodules
+          git submodule foreach --recursive '
+            MOD_PATH="$name"
+            cd "$toplevel/$MOD_PATH"
+
+            echo "🔍 Checking submodule: $MOD_PATH"
+
+            # Skip if this is the same repo we're running CI for
+            if [[ "$MOD_PATH" == "libs/string" ]]; then
+              echo "⚠️ Skipping $MOD_PATH (current module)"
+              exit 0
+            fi
+
+            # Fetch remote branches
+            git fetch origin
+
+            # Check if the target branch exists
+            if git rev-parse --verify origin/${{ steps.extract_branch.outputs.branch }} >/dev/null 2>&1; then
+              echo "✅ Switching $MOD_PATH to branch ${{ steps.extract_branch.outputs.branch }}"
+              git checkout ${{ steps.extract_branch.outputs.branch }}
+              git pull origin ${{ steps.extract_branch.outputs.branch }}
+            else
+              echo "🛑 No matching branch in $MOD_PATH — leaving on default"
+            fi
+          '
+
+      - name: Replace string code in monorepo
+        run: |
+          rm -rf ../AgapeToolkit/libs/string
+          cp -r . ../AgapeToolkit/libs/string
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'  # use your actual Node version
+          node-version: '20'
 
-      - name: Install Dependencies
+      - name: Install monorepo dependencies
+        working-directory: ../AgapeToolkit
         run: npm ci
 
-      - name: Cache Nx
-        uses: actions/cache@v4
-        with:
-          path: .nx/cache
-          key: ${{ runner.os }}-nx-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nx-
-
-      - name: Run Lint (Affected)
-        run: npx nx affected:lint --base=origin/main --head=HEAD
-
-      - name: Run Unit Tests (Affected)
-        run: npx nx affected:test --base=origin/main --head=HEAD
+      - name: Run tests for @agape/string
+        working-directory: ../AgapeToolkit
+        run: npx nx test string
