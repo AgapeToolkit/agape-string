@@ -1,0 +1,2 @@
+npx nx lint string
+npx nx test string --no-watch
