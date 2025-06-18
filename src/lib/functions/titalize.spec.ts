@@ -1,4 +1,4 @@
-import { titalize } from '@agape/string';
+import { titalize } from './titalize';
 
 describe('titalize', () => {
 
