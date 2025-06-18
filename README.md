@@ -5,16 +5,6 @@ String and token manipulation
 ## Synopsis
 
 ```
-import { 
-    camelize,
-    kebabify, 
-    pascalize, 
-    pluralize, 
-    titalize, 
-    verbalize,
-    quantify
-} from '@agape/string'
-
 camelize('user name')          // userName
 camelize('email-address')      // emailAddress
 
@@ -29,6 +19,12 @@ pluralize('analysis')          // analyses
 
 quantify(1, 'item')            // 1 item
 quantify(3, 'box')             // 3 boxes
+
+singularize('cities')          // city
+singularize('analyses')        // analysis
+
+snakify('userName')            // user_name
+snakify('APIResponseCode')     // api_response_code
 
 titalize('the lord of the rings')  // The Lord of the Rings
 titalize('war and peace')          // War and Peace

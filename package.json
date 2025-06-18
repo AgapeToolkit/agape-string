@@ -1,6 +1,6 @@
 {
   "name": "@agape/string",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "String and token manipulation",
   "main": "./cjs/index.js",
   "module": "./es2020/index.js",
@@ -8,6 +8,10 @@
     "agape",
     "string"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgapeToolkit/agape-string"
+  },
   "author": "Maverik Minett",
   "license": "MIT",
   "es2020": "./es2020/index.js",
