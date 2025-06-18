@@ -23,7 +23,6 @@ export function camelize(input: string): string {
     .join('');
 }
 
-
 /**
  * Converts a string to kebab-case.
  * Replaces spaces, underscores, and camelCase transitions with dashes,
@@ -205,6 +204,24 @@ function preserveCasing(source: string, sourceLower: string, target: string): st
 }
 
 /**
+ * Format a number in units, pluralizing the units if there is more or less than
+ * one count.
+ * @param count Number of units
+ * @param unit Label for the value
+ * @param plural Plural label for the value, will pluralize the single unit if
+ *               not provided
+ * @returns String in `x units` format
+ */
+export function quanitfy(count: number|string, unit: string, plural?: string) {
+  const value = typeof count == 'number' ? count : Number(count);
+  
+  const label = value === 1 ? unit : plural === undefined ? pluralize(unit) : plural;
+  
+  return `${count} ${label}`
+
+}
+
+/**
  * Returns the singular form of a plural word.
  * Handles common English pluralization patterns and known irregulars.
  * Preserves casing of the original input.
@@ -259,23 +276,44 @@ export function singularize(word: string): string {
   return word;
 }
 
-/**
- * Format a number in units, pluralizing the units if there is more or less than
- * one count.
- * @param count Number of units
- * @param unit Label for the value
- * @param plural Plural label for the value, will pluralize the single unit if
- *               not provided
- * @returns String in `x units` format
- */
-export function quanitfy(count: number|string, unit: string, plural?: string) {
-  const value = typeof count == 'number' ? count : Number(count);
-  
-  const label = value === 1 ? unit : plural === undefined ? pluralize(unit) : plural;
-  
-  return `${count} ${label}`
 
+/**
+ * Converts a string to kebab-case.
+ * Replaces spaces, underscores, and camelCase transitions with dashes,
+ * removes special characters, and lowercases the result.
+ *
+ * @param input A string to be converted to kebab-case.
+ */
+export function snakify(input: string): string {
+  const versionMatches: string[] = [];
+
+  // Step 1: replace version tokens (v2) with unique placeholders
+  const preserved = input.replace(/(v\d+)(?=[A-Z]|\b)/gi, (match) => {
+    const id = versionMatches.length;
+    versionMatches.push(match);
+    return `_${PLACEHOLDER}_${id}`;
+  });
+
+  let kebabed = preserved
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')          // camelCase
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1_$2')        // acronymWord
+    .replace(/([a-zA-Z])([0-9])/g, '$1_$2')          // letter-digit
+    .replace(/([0-9])([a-zA-Z])/g, '$1_$2')          // digit-letter
+    .replace(/-/g, '_')                              // dash → underscore (1:1)
+    .replace(/\s+/g, '_')                            // spaces → dash
+    .replace(new RegExp(`[^a-zA-Z0-9-${PLACEHOLDER}]+`, 'g'), '_') // symbols → dash
+    .replace(/^_+|_+$/g, '')                         // trim underscores
+    .toLowerCase();
+
+  // Step 3: restore version placeholders (convert dots to dashes, lowercase)
+  versionMatches.forEach((version, i) => {
+    kebabed = kebabed.replace(`${PLACEHOLDER}_${i}`, version);
+  });
+
+  // Step 4: lowercase entire result
+  return kebabed.toLowerCase();
 }
+
 
 /**
  * Converts a string to title case.

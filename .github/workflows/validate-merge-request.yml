@@ -73,4 +73,4 @@ jobs:
 
       - name: Run tests for @agape/string
         working-directory: ../AgapeToolkit
-        run: npx nx test string
+        run: npx nx test string --no-watch --ci
