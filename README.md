@@ -58,11 +58,22 @@ Remove all symbols and spaces, captialize words.
 `pluralize(input: string)`
 
 Adds an 's' to most words. Words that end in 'y' are changed to 'ies'. 
-Words that end in s have 'es' appended to the word.
+Words that end in s have 'es' appended to the word. Handles special cases
+like children and geese.
 
 `quantify(value: number, unit: string, plural?: string)`
 
 The value will be paired with the unit, either singular or plural form
+
+`singularize(input: string)`
+
+Converts a word to it's singular form if it is a plural. Removes the 's' from
+most words. Replacies 'ies' with 'y'. Removes 'es' from the end of a word.
+Handles special cases like 'child' and 'goose'.
+
+`snakify(input: string)`
+
+Converted to snake_case: lower case, word boundaries replaced with underscores. 
 
 `titalize(input: number)`
 
@@ -83,7 +94,7 @@ Maverik Minett  maverik.minett@gmail.com
 
 ## Copyright
 
-© 2020-2024 Maverik Minett
+© 2020-2025 Maverik Minett
 
 ## License
 
