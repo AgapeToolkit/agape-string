@@ -1,0 +1,56 @@
+import { preserveCasing } from '../private/util';
+
+/**
+ * Returns the singular form of a plural word.
+ * Handles common English pluralization patterns and known irregulars.
+ * Preserves casing of the original input.
+ *
+ * @param word Plural word to be converted to singular
+ */
+export function singularize(word: string): string {
+  const lower = word.toLowerCase();
+
+  const irregulars: Record<string, string> = {
+    people: 'person',
+    men: 'man',
+    women: 'woman',
+    children: 'child',
+    teeth: 'tooth',
+    feet: 'foot',
+    mice: 'mouse',
+    geese: 'goose',
+    oxen: 'ox',
+    cacti: 'cactus',
+    nuclei: 'nucleus',
+    fungi: 'fungus',
+    syllabi: 'syllabus',
+    analyses: 'analysis',
+    diagnoses: 'diagnosis',
+    theses: 'thesis',
+    crises: 'crisis'
+  };
+
+  // Handle irregulars
+  if (irregulars[lower]) {
+    const singular = irregulars[lower];
+    return preserveCasing(word, lower, singular);
+  }
+
+  // ies → y
+  if (word.match(/ies$/i) && word.length > 3) {
+    return word.slice(0, -3) + 'y';
+  }
+
+  // es → base (for s, x, z, ch, sh)
+  if (word.match(/(ses|xes|zes|ches|shes)$/i)) {
+    return word.slice(0, -2); // remove 'es'
+  }
+
+  // s → base
+  if (word.match(/s$/i) && !word.match(/ss$/i)) {
+    return word.slice(0, -1);
+  }
+
+  // Default: assume word is already singular
+  return word;
+}
