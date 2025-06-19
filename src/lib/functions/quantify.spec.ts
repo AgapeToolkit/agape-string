@@ -1,4 +1,4 @@
-import { quanitfy } from './quantify';
+import { quantify } from './quantify';
 
 
 describe('quantify', () => {
@@ -13,44 +13,44 @@ describe('quantify', () => {
 
   it('should pluralize the label if < 0', () => {
     value = -1;
-    expect(quanitfy(value, label)).toBe("-1 cats")
+    expect(quantify(value, label)).toBe("-1 cats")
   })
 
   it('should pluralize the label if 0', () => {
     value = 0;
-    expect(quanitfy(value, label)).toBe("0 cats")
+    expect(quantify(value, label)).toBe("0 cats")
   })
 
   it('should pluralize the label if > 0 and < 1', () => {
     value = 0.5;
-    expect(quanitfy(value, label)).toBe("0.5 cats")
+    expect(quantify(value, label)).toBe("0.5 cats")
   })
 
   it('should not pluralize the label if 1', () => {
     value = 1;
-    expect(quanitfy(value, label)).toBe("1 cat")
+    expect(quantify(value, label)).toBe("1 cat")
   })
 
   it('should pluralize the label if 1.x', () => {
     value = -1;
-    expect(quanitfy(value, label)).toBe("-1 cats")
+    expect(quantify(value, label)).toBe("-1 cats")
   })
 
   it('should pluralize the label if >= 2', () => {
     value = 2;
-    expect(quanitfy(value, label)).toBe("2 cats")
+    expect(quantify(value, label)).toBe("2 cats")
 
     value = 420;
-    expect(quanitfy(value, label)).toBe("420 cats")
+    expect(quantify(value, label)).toBe("420 cats")
   })
 
   it('should display formatted numbers', () => {
     value = "05.6";
-    expect(quanitfy(value, label)).toBe("05.6 cats")
+    expect(quantify(value, label)).toBe("05.6 cats")
   })
 
   it('should display formatted numbers', () => {
     value = "432.00";
-    expect(quanitfy(value, label)).toBe("432.00 cats")
+    expect(quantify(value, label)).toBe("432.00 cats")
   })
 })

@@ -3,6 +3,22 @@
  * Removes all non-alphanumeric separators and capitalizes each word except the first.
  *
  * @param input The input string to be camelized.
+ * @returns The camelCased version of the input string.
+ *
+ * @example
+ * camelize("hello world"); // "helloWorld"
+ *
+ * @example
+ * camelize("Hello_world"); // "helloWorld"
+ *
+ * @example
+ * camelize("API_response_code"); // "apiResponseCode"
+ *
+ * @example
+ * camelize("user-42-profile"); // "user42Profile"
+ *
+ * @example
+ * camelize("ThisIsALongVariableName"); // "thisIsALongVariableName"
  */
 export function camelize(input: string): string {
   const parts = input
