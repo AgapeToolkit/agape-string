@@ -12,6 +12,7 @@ import { preserveCasing } from '../private/util';
  * @param word A singular word to be pluralized
  */
 export function pluralize(word: string): string {
+  if (word.length === 0) return '';
   const lower = word.toLowerCase();
 
   const irregulars: Record<string, string> = {
@@ -34,18 +35,48 @@ export function pluralize(word: string): string {
     crisis: 'crises'
   };
 
+  const acronyms: Record<string, string> = {
+    API: 'APIs',
+    ID: 'IDs',
+    HTML: 'HTMLs',
+    URL: 'URLs',
+    CPU: 'CPUs',
+    GPU: 'GPUs',
+    FAQ: 'FAQs',
+    UI: 'UIs',
+    UX: 'UXs',
+    IP: 'IPs',
+    DBM: 'DBMs',
+    ORM: 'ORMs',
+    SDK: 'SDKs',
+    CLI: 'CLIs',
+    DOM: 'DOMs',
+    JSON: 'JSONS',
+    PDF: 'PDFs',
+  }
+
   if (irregulars[lower]) {
     const plural = irregulars[lower];
     return preserveCasing(word, lower, plural);
   }
 
+  const isUppercase = word.length && word === word.toUpperCase();
+
+  if (isUppercase && acronyms[word]) {
+    return acronyms[word];
+  }
+
   if (word.match(/[^aeiou]y$/i)) {
-    return word.slice(0, -1) + 'ies';
+    return word.slice(0, -1) + (isUppercase ? 'EIS' : 'ies');
+  }
+
+  if (word.match(/^.$/)) {
+    return word + 's';
   }
 
   if (word.length > 1 && word.match(/(s|x|z|ch|sh)$/i)) {
-    return word + 'es';
+    return word + (isUppercase ? 'ES' : 'es');
   }
 
-  return word + 's';
+  return word + (isUppercase ? 'S' : 's');
 }

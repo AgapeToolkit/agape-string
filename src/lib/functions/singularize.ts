@@ -36,9 +36,11 @@ export function singularize(word: string): string {
     return preserveCasing(word, lower, singular);
   }
 
+  const isUppercase = word === word.toUpperCase();
+
   // ies → y
   if (word.match(/ies$/i) && word.length > 3) {
-    return word.slice(0, -3) + 'y';
+    return word.slice(0, -3) + (isUppercase ? 'Y' : 'y');
   }
 
   // es → base (for s, x, z, ch, sh)

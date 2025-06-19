@@ -55,7 +55,7 @@ describe('pluralize', () => {
   });
 
   it('should handle empty string', () => {
-    expect(pluralize('')).toEqual('s');
+    expect(pluralize('')).toEqual('');
   });
 
   it('should pluralize words with existing "es" ending appropriately', () => {
