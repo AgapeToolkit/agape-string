@@ -2,10 +2,30 @@ import { PLACEHOLDER } from "../private/constants";
 
 /**
  * Converts a string to kebab-case.
- * Replaces spaces, underscores, and camelCase transitions with dashes,
- * removes special characters, and lowercases the result.
+ *
+ * Replaces spaces, underscores, camelCase transitions, and other separators with dashes.
+ * It also preserves version tokens like "v2" and lowercases the result.
  *
  * @param input A string to be converted to kebab-case.
+ * @returns The kebab-cased version of the input string.
+ *
+ * @example
+ * kebabify("hello world"); // "hello-world"
+ *
+ * @example
+ * kebabify("first_name"); // "first-name"
+ *
+ * @example
+ * kebabify("userProfile42"); // "user-profile-42"
+ *
+ * @example
+ * kebabify("APIResponseV2"); // "api-response-v2"
+ *
+ * @example
+ * kebabify("HTML5_Parser v3"); // "html-5-parser-v3"
+ *
+ * @example
+ * kebabify("  Leading_and trailing   "); // "leading-and-trailing"
  */
 export function kebabify(input: string): string {
   const versionMatches: string[] = [];

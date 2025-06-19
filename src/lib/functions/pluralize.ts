@@ -2,14 +2,50 @@ import { preserveCasing } from '../private/util';
 
 /**
  * Returns a string formatted in its plural form.
+ *
  * Handles common English pluralization rules, including:
  * - y → ies
  * - s/x/z/ch/sh → es
  * - known irregulars (e.g., child → children)
+ * - acronym exceptions (e.g., API → APIs)
  *
  * The output preserves the casing of the input, especially the prefix.
  *
- * @param word A singular word to be pluralized
+ * @param word A singular word to be pluralized.
+ * @returns The plural form of the input word.
+ *
+ * @example
+ * pluralize("city"); // "cities"
+ *
+ * @example
+ * pluralize("box"); // "boxes"
+ *
+ * @example
+ * pluralize("child"); // "children"
+ *
+ * @example
+ * pluralize("person"); // "people"
+ *
+ * @example
+ * pluralize("API"); // "APIs"
+ *
+ * @example
+ * pluralize("ID"); // "IDs"
+ *
+ * @example
+ * pluralize("File"); // "Files"
+ *
+ * @example
+ * pluralize("buzz"); // "buzzes"
+ *
+ * @example
+ * pluralize("CPU"); // "CPUs"
+ *
+ * @example
+ * pluralize("DOG"); // "DOGS"
+ *
+ * @example
+ * pluralize("A"); // "as"
  */
 export function pluralize(word: string): string {
   if (word.length === 0) return '';
@@ -51,7 +87,7 @@ export function pluralize(word: string): string {
     SDK: 'SDKs',
     CLI: 'CLIs',
     DOM: 'DOMs',
-    JSON: 'JSONS',
+    JSON: 'JSONs',
     PDF: 'PDFs',
   }
 

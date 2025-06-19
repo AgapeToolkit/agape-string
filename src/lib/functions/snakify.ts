@@ -1,11 +1,29 @@
 import { PLACEHOLDER } from '../private/constants';
 
 /**
- * Converts a string to kebab-case.
- * Replaces spaces, underscores, and camelCase transitions with dashes,
- * removes special characters, and lowercases the result.
+ * Converts a string to snake_case.
  *
- * @param input A string to be converted to kebab-case.
+ * Replaces spaces, dashes, and camelCase transitions with underscores,
+ * removes special characters, preserves embedded version tokens (like "v2"),
+ * and lowercases the result.
+ *
+ * @param input A string to be converted to snake_case.
+ * @returns The snake_cased version of the input.
+ *
+ * @example
+ * snakify("hello world"); // "hello_world"
+ *
+ * @example
+ * snakify("UserProfileV2"); // "user_profile_v2"
+ *
+ * @example
+ * snakify("HTML5 Parser"); // "html_5_parser"
+ *
+ * @example
+ * snakify("  messy-input_string  "); // "messy_input_string"
+ *
+ * @example
+ * snakify("ReportV3Final"); // "report_v3_final"
  */
 export function snakify(input: string): string {
   const versionMatches: string[] = [];

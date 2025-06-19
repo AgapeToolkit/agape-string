@@ -1,8 +1,26 @@
 /**
  * Converts a string to PascalCase.
- * Removes non-alphanumeric characters, capitalizes each word, and strips leading numbers.
+ *
+ * Removes non-alphanumeric characters, splits on casing and digits,
+ * capitalizes each word, and strips leading/trailing separators.
  *
  * @param input A string to be returned in PascalCase.
+ * @returns The PascalCased version of the input string.
+ *
+ * @example
+ * pascalize("hello world"); // "HelloWorld"
+ *
+ * @example
+ * pascalize("first_name"); // "FirstName"
+ *
+ * @example
+ * pascalize("user42Profile"); // "User42Profile"
+ *
+ * @example
+ * pascalize("API response code"); // "ApiResponseCode"
+ *
+ * @example
+ * pascalize("  messy__input--string  "); // "MessyInputString"
  */
 export function pascalize(input: string): string {
   const parts = input

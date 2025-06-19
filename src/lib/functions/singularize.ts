@@ -2,10 +2,38 @@ import { preserveCasing } from '../private/util';
 
 /**
  * Returns the singular form of a plural word.
- * Handles common English pluralization patterns and known irregulars.
- * Preserves casing of the original input.
  *
- * @param word Plural word to be converted to singular
+ * Handles common English pluralization patterns such as:
+ * - ies → y
+ * - es → base (for s, x, z, ch, sh endings)
+ * - s → base (general fallback)
+ * - known irregulars (e.g., children → child)
+ *
+ * Preserves the casing of the original input, including acronyms or title case.
+ *
+ * @param word Plural word to be converted to singular.
+ * @returns The singular form of the input word.
+ *
+ * @example
+ * singularize("cities"); // "city"
+ *
+ * @example
+ * singularize("boxes"); // "box"
+ *
+ * @example
+ * singularize("children"); // "child"
+ *
+ * @example
+ * singularize("teeth"); // "tooth"
+ *
+ * @example
+ * singularize("dogs"); // "dog"
+ *
+ * @example
+ * singularize("BUZZES"); // "BUZZ"
+ *
+ * @example
+ * singularize("IDs"); // "ID"
  */
 export function singularize(word: string): string {
   const lower = word.toLowerCase();
