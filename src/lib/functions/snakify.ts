@@ -7,24 +7,27 @@ import { PLACEHOLDER } from '../private/constants';
  * removes special characters, preserves embedded version tokens (like "v2"),
  * and lowercases the result.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * snakify("hello world"); // "hello_world"
  * ```
  *
+ * @example
  * ```ts
  * snakify("UserProfileV2"); // "user_profile_v2"
  * ```
  *
+ * @example
  * ```ts
  * snakify("HTML5 Parser"); // "html_5_parser"
  * ```
  *
+ * @example
  * ```ts
  * snakify("  messy-input_string  "); // "messy_input_string"
  * ```
  *
+ * @example
  * ```ts
  * snakify("ReportV3Final"); // "report_v3_final"
  * ```

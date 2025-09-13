@@ -7,28 +7,32 @@ import { PLACEHOLDER } from '../private/constants';
  * identifiers into space-separated words. Capitalizes the first word, and
  * preserves acronyms and version tokens (e.g., `v2`, `v3.1`).
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * verbalize("helloWorld"); // "Hello world"
  * ```
  *
+ * @example
  * ```ts
  * verbalize("HTML5Parser"); // "HTML 5 parser"
  * ```
  *
+ * @example
  * ```ts
  * verbalize("api_v2_response"); // "Api v2 response"
  * ```
  *
+ * @example
  * ```ts
  * verbalize("User-ID"); // "User ID"
  * ```
  *
+ * @example
  * ```ts
  * verbalize("employeeV3Final"); // "Employee v3 final"
  * ```
  *
+ * @example
  * ```ts
  * verbalize("version_2_0_release"); // "Version 2 0 release"
  * ```

@@ -11,32 +11,37 @@ import { preserveCasing } from '../private/util';
  *
  * Preserves the casing of the original input, including acronyms or title case.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * singularize("cities"); // "city"
  * ```
  *
+ * @example
  * ```ts
  * singularize("boxes"); // "box"
  * ```
  *
+ * @example
  * ```ts
  * singularize("children"); // "child"
  * ```
  *
+ * @example
  * ```ts
  * singularize("teeth"); // "tooth"
  * ```
  *
+ * @example
  * ```ts
  * singularize("dogs"); // "dog"
  * ```
  *
+ * @example
  * ```ts
  * singularize("BUZZES"); // "BUZZ"
  * ```
  *
+ * @example
  * ```ts
  * singularize("IDs"); // "ID"
  * ```

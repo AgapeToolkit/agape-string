@@ -4,24 +4,27 @@
  * Removes non-alphanumeric characters, splits on casing and digits,
  * capitalizes each word, and strips leading/trailing separators.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * pascalize("hello world"); // "HelloWorld"
  * ```
  *
+ * @example
  * ```ts
  * pascalize("first_name"); // "FirstName"
  * ```
  *
+ * @example
  * ```ts
  * pascalize("user42Profile"); // "User42Profile"
  * ```
  *
+ * @example
  * ```ts
  * pascalize("API response code"); // "ApiResponseCode"
  * ```
  *
+ * @example
  * ```ts
  * pascalize("  messy__input--string  "); // "MessyInputString"
  * ```
