@@ -11,41 +11,54 @@ import { preserveCasing } from '../private/util';
  *
  * The output preserves the casing of the input, especially the prefix.
  *
+ * ## Usage
+ *
+ * ```ts
+ * pluralize("city"); // "cities"
+ * ```
+ *
+ * ```ts
+ * pluralize("box"); // "boxes"
+ * ```
+ *
+ * ```ts
+ * pluralize("child"); // "children"
+ * ```
+ *
+ * ```ts
+ * pluralize("person"); // "people"
+ * ```
+ *
+ * ```ts
+ * pluralize("API"); // "APIs"
+ * ```
+ *
+ * ```ts
+ * pluralize("ID"); // "IDs"
+ * ```
+ *
+ * ```ts
+ * pluralize("File"); // "Files"
+ * ```
+ *
+ * ```ts
+ * pluralize("buzz"); // "buzzes"
+ * ```
+ *
+ * ```ts
+ * pluralize("CPU"); // "CPUs"
+ * ```
+ *
+ * ```ts
+ * pluralize("DOG"); // "DOGS"
+ * ```
+ *
+ * ```ts
+ * pluralize("A"); // "As"
+ * ```
+ *
  * @param word A singular word to be pluralized.
  * @returns The plural form of the input word.
- *
- * @example
- * pluralize("city"); // "cities"
- *
- * @example
- * pluralize("box"); // "boxes"
- *
- * @example
- * pluralize("child"); // "children"
- *
- * @example
- * pluralize("person"); // "people"
- *
- * @example
- * pluralize("API"); // "APIs"
- *
- * @example
- * pluralize("ID"); // "IDs"
- *
- * @example
- * pluralize("File"); // "Files"
- *
- * @example
- * pluralize("buzz"); // "buzzes"
- *
- * @example
- * pluralize("CPU"); // "CPUs"
- *
- * @example
- * pluralize("DOG"); // "DOGS"
- *
- * @example
- * pluralize("A"); // "as"
  */
 export function pluralize(word: string): string {
   if (word.length === 0) return '';

@@ -4,23 +4,30 @@
  * Removes non-alphanumeric characters, splits on casing and digits,
  * capitalizes each word, and strips leading/trailing separators.
  *
+ * ## Usage
+ *
+ * ```ts
+ * pascalize("hello world"); // "HelloWorld"
+ * ```
+ *
+ * ```ts
+ * pascalize("first_name"); // "FirstName"
+ * ```
+ *
+ * ```ts
+ * pascalize("user42Profile"); // "User42Profile"
+ * ```
+ *
+ * ```ts
+ * pascalize("API response code"); // "ApiResponseCode"
+ * ```
+ *
+ * ```ts
+ * pascalize("  messy__input--string  "); // "MessyInputString"
+ * ```
+ *
  * @param input A string to be returned in PascalCase.
  * @returns The PascalCased version of the input string.
- *
- * @example
- * pascalize("hello world"); // "HelloWorld"
- *
- * @example
- * pascalize("first_name"); // "FirstName"
- *
- * @example
- * pascalize("user42Profile"); // "User42Profile"
- *
- * @example
- * pascalize("API response code"); // "ApiResponseCode"
- *
- * @example
- * pascalize("  messy__input--string  "); // "MessyInputString"
  */
 export function pascalize(input: string): string {
   const parts = input
