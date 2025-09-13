@@ -6,26 +6,34 @@ import { PLACEHOLDER } from "../private/constants";
  * Replaces spaces, underscores, camelCase transitions, and other separators with dashes.
  * It also preserves version tokens like "v2" and lowercases the result.
  *
+ * ## Usage
+ *
+ * ```ts
+ * kebabify("hello world"); // "hello-world"
+ * ```
+ *
+ * ```ts
+ * kebabify("first_name"); // "first-name"
+ * ```
+ *
+ * ```ts
+ * kebabify("userProfile42"); // "user-profile-42"
+ * ```
+ *
+ * ```ts
+ * kebabify("APIResponseV2"); // "api-response-v2"
+ * ```
+ *
+ * ```ts
+ * kebabify("HTML5_Parser v3"); // "html-5-parser-v3"
+ * ```
+ *
+ * ```ts
+ * kebabify("  Leading_and trailing   "); // "leading-and-trailing"
+ * ```
+ *
  * @param input A string to be converted to kebab-case.
  * @returns The kebab-cased version of the input string.
- *
- * @example
- * kebabify("hello world"); // "hello-world"
- *
- * @example
- * kebabify("first_name"); // "first-name"
- *
- * @example
- * kebabify("userProfile42"); // "user-profile-42"
- *
- * @example
- * kebabify("APIResponseV2"); // "api-response-v2"
- *
- * @example
- * kebabify("HTML5_Parser v3"); // "html-5-parser-v3"
- *
- * @example
- * kebabify("  Leading_and trailing   "); // "leading-and-trailing"
  */
 export function kebabify(input: string): string {
   const versionMatches: string[] = [];
@@ -35,7 +43,7 @@ export function kebabify(input: string): string {
     const id = versionMatches.length;
     versionMatches.push(match);
     return `-${PLACEHOLDER}-${id}`;
-  });  
+  });
 
   let kebabed = preserved
     .replace(/([a-z0-9])([A-Z])/g, '$1-$2')          // camelCase

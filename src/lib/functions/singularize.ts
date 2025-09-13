@@ -11,29 +11,38 @@ import { preserveCasing } from '../private/util';
  *
  * Preserves the casing of the original input, including acronyms or title case.
  *
+ * ## Usage
+ *
+ * ```ts
+ * singularize("cities"); // "city"
+ * ```
+ *
+ * ```ts
+ * singularize("boxes"); // "box"
+ * ```
+ *
+ * ```ts
+ * singularize("children"); // "child"
+ * ```
+ *
+ * ```ts
+ * singularize("teeth"); // "tooth"
+ * ```
+ *
+ * ```ts
+ * singularize("dogs"); // "dog"
+ * ```
+ *
+ * ```ts
+ * singularize("BUZZES"); // "BUZZ"
+ * ```
+ *
+ * ```ts
+ * singularize("IDs"); // "ID"
+ * ```
+ *
  * @param word Plural word to be converted to singular.
  * @returns The singular form of the input word.
- *
- * @example
- * singularize("cities"); // "city"
- *
- * @example
- * singularize("boxes"); // "box"
- *
- * @example
- * singularize("children"); // "child"
- *
- * @example
- * singularize("teeth"); // "tooth"
- *
- * @example
- * singularize("dogs"); // "dog"
- *
- * @example
- * singularize("BUZZES"); // "BUZZ"
- *
- * @example
- * singularize("IDs"); // "ID"
  */
 export function singularize(word: string): string {
   const lower = word.toLowerCase();

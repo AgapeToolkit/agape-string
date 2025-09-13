@@ -7,23 +7,30 @@ import { PLACEHOLDER } from '../private/constants';
  * removes special characters, preserves embedded version tokens (like "v2"),
  * and lowercases the result.
  *
+ * ## Usage
+ *
+ * ```ts
+ * snakify("hello world"); // "hello_world"
+ * ```
+ *
+ * ```ts
+ * snakify("UserProfileV2"); // "user_profile_v2"
+ * ```
+ *
+ * ```ts
+ * snakify("HTML5 Parser"); // "html_5_parser"
+ * ```
+ *
+ * ```ts
+ * snakify("  messy-input_string  "); // "messy_input_string"
+ * ```
+ *
+ * ```ts
+ * snakify("ReportV3Final"); // "report_v3_final"
+ * ```
+ *
  * @param input A string to be converted to snake_case.
  * @returns The snake_cased version of the input.
- *
- * @example
- * snakify("hello world"); // "hello_world"
- *
- * @example
- * snakify("UserProfileV2"); // "user_profile_v2"
- *
- * @example
- * snakify("HTML5 Parser"); // "html_5_parser"
- *
- * @example
- * snakify("  messy-input_string  "); // "messy_input_string"
- *
- * @example
- * snakify("ReportV3Final"); // "report_v3_final"
  */
 export function snakify(input: string): string {
   const versionMatches: string[] = [];

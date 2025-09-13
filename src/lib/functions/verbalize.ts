@@ -7,26 +7,34 @@ import { PLACEHOLDER } from '../private/constants';
  * identifiers into space-separated words. Capitalizes the first word, and
  * preserves acronyms and version tokens (e.g., `v2`, `v3.1`).
  *
+ * ## Usage
+ *
+ * ```ts
+ * verbalize("helloWorld"); // "Hello world"
+ * ```
+ *
+ * ```ts
+ * verbalize("HTML5Parser"); // "HTML 5 parser"
+ * ```
+ *
+ * ```ts
+ * verbalize("api_v2_response"); // "Api v2 response"
+ * ```
+ *
+ * ```ts
+ * verbalize("User-ID"); // "User ID"
+ * ```
+ *
+ * ```ts
+ * verbalize("employeeV3Final"); // "Employee v3 final"
+ * ```
+ *
+ * ```ts
+ * verbalize("version_2_0_release"); // "Version 2 0 release"
+ * ```
+ *
  * @param input A string to be returned as spoken words.
  * @returns A natural-language version of the input identifier.
- *
- * @example
- * verbalize("helloWorld"); // "Hello world"
- *
- * @example
- * verbalize("HTML5Parser"); // "HTML 5 parser"
- *
- * @example
- * verbalize("api_v2_response"); // "Api v2 response"
- *
- * @example
- * verbalize("User-ID"); // "User ID"
- *
- * @example
- * verbalize("employeeV3Final"); // "Employee v3 final"
- *
- * @example
- * verbalize("version_2_0_release"); // "Version 2 0 release"
  */
 export function verbalize(input: string): string {
   const versionMatches: string[] = [];
