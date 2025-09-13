@@ -3,7 +3,7 @@ import { quantify } from './quantify';
 
 describe('quantify', () => {
 
-  let value: number|string;
+  let value: number | string | undefined;
   let label: string;
 
   beforeEach( () => {
