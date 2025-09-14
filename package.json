@@ -1,6 +1,6 @@
 {
   "name": "@agape/string",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "String and token manipulation",
   "main": "./cjs/index.js",
   "module": "./es2020/index.js",
