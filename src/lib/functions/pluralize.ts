@@ -11,48 +11,57 @@ import { preserveCasing } from '../private/util';
  *
  * The output preserves the casing of the input, especially the prefix.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * pluralize("city"); // "cities"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("box"); // "boxes"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("child"); // "children"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("person"); // "people"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("API"); // "APIs"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("ID"); // "IDs"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("File"); // "Files"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("buzz"); // "buzzes"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("CPU"); // "CPUs"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("DOG"); // "DOGS"
  * ```
  *
+ * @example
  * ```ts
  * pluralize("A"); // "As"
  * ```

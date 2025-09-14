@@ -6,28 +6,32 @@ import { PLACEHOLDER } from "../private/constants";
  * Replaces spaces, underscores, camelCase transitions, and other separators with dashes.
  * It also preserves version tokens like "v2" and lowercases the result.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * kebabify("hello world"); // "hello-world"
  * ```
  *
+ * @example
  * ```ts
  * kebabify("first_name"); // "first-name"
  * ```
  *
+ * @example
  * ```ts
  * kebabify("userProfile42"); // "user-profile-42"
  * ```
  *
+ * @example
  * ```ts
  * kebabify("APIResponseV2"); // "api-response-v2"
  * ```
  *
+ * @example
  * ```ts
  * kebabify("HTML5_Parser v3"); // "html-5-parser-v3"
  * ```
  *
+ * @example
  * ```ts
  * kebabify("  Leading_and trailing   "); // "leading-and-trailing"
  * ```

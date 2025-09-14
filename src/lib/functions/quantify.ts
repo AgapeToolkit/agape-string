@@ -8,28 +8,32 @@ import { pluralize } from './pluralize';
  * <code><reference>pluralize</reference>(<property>unit</property>)</code>
  * to generate one.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * quantify(1, "apple"); // "1 apple"
  * ```
  *
+ * @example
  * ```ts
  * quantify(3, "apple"); // "3 apples"
  * ```
  *
+ * @example
  * ```ts
  * quantify("02", "box"); // "02 boxes"
  * ```
  *
+ * @example
  * ```ts
  * quantify(1, "child", "children"); // "1 child"
  * ```
  *
+ * @example
  * ```ts
  * quantify(2, "child", "children"); // "2 children"
  * ```
  *
+ * @example
  * ```ts
  * quantify(5, "CPU"); // "5 CPUs"
  * ```

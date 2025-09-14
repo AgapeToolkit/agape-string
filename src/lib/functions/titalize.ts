@@ -5,24 +5,27 @@
  * (like "of", "and", "the") unless they appear at the beginning.
  * Preserves words already containing uppercase letters (e.g., acronyms).
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * titalize("the quick brown fox"); // "The Quick Brown Fox"
  * ```
  *
+ * @example
  * ```ts
  * titalize("a tale of two cities"); // "A Tale of Two Cities"
  * ```
  *
+ * @example
  * ```ts
  * titalize("in the heart of the sea"); // "In the Heart of the Sea"
  * ```
  *
+ * @example
  * ```ts
  * titalize("API reference guide"); // "API Reference Guide"
  * ```
  *
+ * @example
  * ```ts
  * titalize("   war and peace   "); // "War and Peace"
  * ```

@@ -2,24 +2,27 @@
  * Converts a string to camelCase.
  * Removes all non-alphanumeric separators and capitalizes each word except the first.
  *
- * ## Usage
- *
+ * @example
  * ```ts
  * camelize("hello world"); // "helloWorld"
  * ```
  *
+ * @example
  * ```ts
  * camelize("Hello_world"); // "helloWorld"
  * ```
  *
+ * @example
  * ```ts
  * camelize("API_response_code"); // "apiResponseCode"
  * ```
  *
+ * @example
  * ```ts
  * camelize("user-42-profile"); // "user42Profile"
  * ```
  *
+ * @example
  * ```ts
  * camelize("ThisIsALongVariableName"); // "thisIsALongVariableName"
  * ```
