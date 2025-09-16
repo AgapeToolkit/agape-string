@@ -4,33 +4,33 @@
  *
  * @example
  * ```ts
- * camelize("hello world"); // "helloWorld"
+ * toCamelCase("hello world"); // "helloWorld"
  * ```
  *
  * @example
  * ```ts
- * camelize("Hello_world"); // "helloWorld"
+ * toCamelCase("Hello_world"); // "helloWorld"
  * ```
  *
  * @example
  * ```ts
- * camelize("API_response_code"); // "apiResponseCode"
+ * toCamelCase("API_response_code"); // "apiResponseCode"
  * ```
  *
  * @example
  * ```ts
- * camelize("user-42-profile"); // "user42Profile"
+ * toCamelCase("user-42-profile"); // "user42Profile"
  * ```
  *
  * @example
  * ```ts
- * camelize("ThisIsALongVariableName"); // "thisIsALongVariableName"
+ * toCamelCase("ThisIsALongVariableName"); // "thisIsALongVariableName"
  * ```
  *
  * @param input The input string to be camelized.
  * @returns The camelCased version of the input string.
  */
-export function camelize(input: string): string {
+export function toCamelCase(input: string): string {
   const parts = input
     .replace(/[^A-Za-z0-9]+/g, ' ')
     .replace(/([0-9])([A-Za-z])/g, '$1 $2')     // digit → letter

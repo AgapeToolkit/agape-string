@@ -7,33 +7,33 @@
  *
  * @example
  * ```ts
- * titalize("the quick brown fox"); // "The Quick Brown Fox"
+ * toTitleCase("the quick brown fox"); // "The Quick Brown Fox"
  * ```
  *
  * @example
  * ```ts
- * titalize("a tale of two cities"); // "A Tale of Two Cities"
+ * toTitleCase("a tale of two cities"); // "A Tale of Two Cities"
  * ```
  *
  * @example
  * ```ts
- * titalize("in the heart of the sea"); // "In the Heart of the Sea"
+ * toTitleCase("in the heart of the sea"); // "In the Heart of the Sea"
  * ```
  *
  * @example
  * ```ts
- * titalize("API reference guide"); // "API Reference Guide"
+ * toTitleCase("API reference guide"); // "API Reference Guide"
  * ```
  *
  * @example
  * ```ts
- * titalize("   war and peace   "); // "War and Peace"
+ * toTitleCase("   war and peace   "); // "War and Peace"
  * ```
  *
  * @param input The string to be converted to title case.
  * @returns The input string formatted in title case.
  */
-export function titalize(input: string): string {
+export function toTitleCase(input: string): string {
   const smallWords = new Set([
     'a', 'an', 'and', 'at', 'be', 'but', 'by', 'for',
     'in', 'of', 'on', 'the', 'to'

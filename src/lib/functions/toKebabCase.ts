@@ -8,38 +8,38 @@ import { PLACEHOLDER } from "../private/constants";
  *
  * @example
  * ```ts
- * kebabify("hello world"); // "hello-world"
+ * toKebabCase("hello world"); // "hello-world"
  * ```
  *
  * @example
  * ```ts
- * kebabify("first_name"); // "first-name"
+ * toKebabCase("first_name"); // "first-name"
  * ```
  *
  * @example
  * ```ts
- * kebabify("userProfile42"); // "user-profile-42"
+ * toKebabCase("userProfile42"); // "user-profile-42"
  * ```
  *
  * @example
  * ```ts
- * kebabify("APIResponseV2"); // "api-response-v2"
+ * toKebabCase("APIResponseV2"); // "api-response-v2"
  * ```
  *
  * @example
  * ```ts
- * kebabify("HTML5_Parser v3"); // "html-5-parser-v3"
+ * toKebabCase("HTML5_Parser v3"); // "html-5-parser-v3"
  * ```
  *
  * @example
  * ```ts
- * kebabify("  Leading_and trailing   "); // "leading-and-trailing"
+ * toKebabCase("  Leading_and trailing   "); // "leading-and-trailing"
  * ```
  *
  * @param input A string to be converted to kebab-case.
  * @returns The kebab-cased version of the input string.
  */
-export function kebabify(input: string): string {
+export function toKebabCase(input: string): string {
   const versionMatches: string[] = [];
 
   // Step 1: replace version tokens (v2) with unique placeholders

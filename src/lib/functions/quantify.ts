@@ -1,11 +1,11 @@
-import { pluralize } from './pluralize';
+import { toPlural } from './toPlural';
 
 /**
  * Formats a number with a unit, automatically pluralizing the unit based on the count.
  *
  * If the `<property>count` is exactly 1, the singular `<property>unit` is used.
  * Otherwise, it either uses  the provided `<property>plural` form or calls
- * <code><reference>pluralize</reference>(<property>unit</property>)</code>
+ * <code><reference>toPlural</reference>(<property>unit</property>)</code>
  * to generate one.
  *
  * @example
@@ -46,7 +46,7 @@ import { pluralize } from './pluralize';
 export function quantify(count: number | string, unit: string, plural?: string) {
   const value = typeof count == 'number' ? count : Number(count);
 
-  const label = value === 1 ? unit : plural === undefined ? pluralize(unit) : plural;
+  const label = value === 1 ? unit : plural === undefined ? toPlural(unit) : plural;
 
   return `${count} ${label}`
 }

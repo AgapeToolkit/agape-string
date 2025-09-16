@@ -1,97 +1,190 @@
 # @agape/string
 
-String and token manipulation
+String manipulation and transformation utilities for TypeScript.
 
-## Synopsis
+## ✨ Functions
 
+### `toCamelCase(input: string)`
+Converts a string to camelCase format.
+
+### `toKebabCase(input: string)`
+Converts a string to kebab-case format.
+
+### `toPascalCase(input: string)`
+Converts a string to PascalCase format.
+
+### `toSnakeCase(input: string)`
+Converts a string to snake_case format.
+
+### `toTitleCase(input: string)`
+Converts a string to Title Case format.
+
+### `toWords(input: string)`
+Converts identifiers to natural language words.
+
+### `toPlural(word: string)`
+Converts a singular word to its plural form.
+
+### `toSingular(word: string)`
+Converts a plural word to its singular form.
+
+### `quantify(count: number | string, unit: string, plural?: string)`
+Formats a number with a unit, automatically pluralizing based on count.
+
+---
+
+## 🚀 Example
+
+```ts
+import { 
+  toCamelCase, 
+  toKebabCase, 
+  toPascalCase, 
+  toSnakeCase, 
+  toTitleCase, 
+  toWords, 
+  toPlural, 
+  toSingular, 
+  quantify 
+} from '@agape/string';
+
+// Case conversion
+toCamelCase('user name')          // "userName"
+toCamelCase('email-address')      // "emailAddress"
+
+toKebabCase('Display Name')       // "display-name"
+toKebabCase('userProfileId')      // "user-profile-id"
+
+toPascalCase('user id')           // "UserId"
+toPascalCase('api_response_code') // "ApiResponseCode"
+
+toSnakeCase('userName')           // "user_name"
+toSnakeCase('APIResponseCode')    // "api_response_code"
+
+toTitleCase('the lord of the rings')  // "The Lord of the Rings"
+toTitleCase('war and peace')          // "War and Peace"
+
+// Natural language
+toWords('user-profile-id')        // "User profile id"
+toWords('XMLHttpRequest')         // "XML Http Request"
+
+// Pluralization
+toPlural('city')                  // "cities"
+toPlural('analysis')              // "analyses"
+toPlural('API')                   // "APIs"
+
+toSingular('cities')              // "city"
+toSingular('analyses')            // "analysis"
+toSingular('APIs')                // "API"
+
+// Quantification
+quantify(1, 'item')               // "1 item"
+quantify(3, 'box')                // "3 boxes"
+quantify(1, 'child', 'children')  // "1 child"
+quantify(2, 'child', 'children')  // "2 children"
+quantify(5, 'CPU')                // "5 CPUs"
 ```
-camelize('user name')          // userName
-camelize('email-address')      // emailAddress
 
-kebabify('Display Name')       // display-name
-kebabify('userProfileId')      // user-profile-id
+---
 
-pascalize('user id')           // UserId
-pascalize('api_response_code') // ApiResponseCode
+## 🔧 Function Details
 
-pluralize('city')              // cities
-pluralize('analysis')          // analyses
+### `toCamelCase(input: string)`
+Converts a string to camelCase by removing non-alphanumeric separators and capitalizing each word except the first.
 
-quantify(1, 'item')            // 1 item
-quantify(3, 'box')             // 3 boxes
+**Examples:**
+- `"hello world"` → `"helloWorld"`
+- `"API_response_code"` → `"apiResponseCode"`
+- `"user-42-profile"` → `"user42Profile"`
 
-singularize('cities')          // city
-singularize('analyses')        // analysis
+### `toKebabCase(input: string)`
+Converts a string to kebab-case by replacing spaces, underscores, and camelCase transitions with dashes. Preserves version tokens like "v2".
 
-snakify('userName')            // user_name
-snakify('APIResponseCode')     // api_response_code
+**Examples:**
+- `"hello world"` → `"hello-world"`
+- `"UserProfileV2"` → `"user-profile-v2"`
+- `"HTML5 Parser"` → `"html-5-parser"`
 
-titalize('the lord of the rings')  // The Lord of the Rings
-titalize('war and peace')          // War and Peace
+### `toPascalCase(input: string)`
+Converts a string to PascalCase by removing non-alphanumeric characters, splitting on casing and digits, and capitalizing each word.
 
-verbalize('user-profile-id')   // User profile id
-verbalize('XMLHttpRequest')    // XML Http Request
-```
+**Examples:**
+- `"hello world"` → `"HelloWorld"`
+- `"user42Profile"` → `"User42Profile"`
+- `"API response code"` → `"ApiResponseCode"`
 
-## Description
+### `toSnakeCase(input: string)`
+Converts a string to snake_case by replacing spaces, dashes, and camelCase transitions with underscores. Preserves version tokens.
 
-Translate strings between different representations.
+**Examples:**
+- `"hello world"` → `"hello_world"`
+- `"UserProfileV2"` → `"user_profile_v2"`
+- `"HTML5 Parser"` → `"html_5_parser"`
 
-## Functions
+### `toTitleCase(input: string)`
+Converts a string to Title Case by capitalizing the first letter of each word, except for small words (like "of", "and", "the") unless they appear at the beginning.
 
-`camelize(input: string)`
+**Examples:**
+- `"the quick brown fox"` → `"The Quick Brown Fox"`
+- `"a tale of two cities"` → `"A Tale of Two Cities"`
+- `"API reference guide"` → `"API Reference Guide"`
 
-Convert to camel case.
+### `toWords(input: string)`
+Converts identifiers to natural language words by splitting camelCase, PascalCase, snake_case, and kebab-case into space-separated words.
 
-`kebabify(input: string)`
+**Examples:**
+- `"userProfileId"` → `"User profile id"`
+- `"XMLHttpRequest"` → `"XML Http Request"`
+- `"api_v2_response"` → `"Api v2 response"`
 
-Converted to kebab-case: lower case, word boundaries replaced with dashes. 
+### `toPlural(word: string)`
+Converts a singular word to its plural form using common English pluralization rules.
 
-`pascalize(input: string)`
+**Features:**
+- Handles irregular plurals (child → children, person → people)
+- Preserves acronyms (API → APIs, ID → IDs)
+- Maintains original casing
 
-Remove all symbols and spaces, captialize words.
+**Examples:**
+- `"city"` → `"cities"`
+- `"box"` → `"boxes"`
+- `"child"` → `"children"`
+- `"API"` → `"APIs"`
 
-`pluralize(input: string)`
+### `toSingular(word: string)`
+Converts a plural word to its singular form using common English patterns.
 
-Adds an 's' to most words. Words that end in 'y' are changed to 'ies'. 
-Words that end in s have 'es' appended to the word. Handles special cases
-like children and geese.
+**Features:**
+- Handles irregular plurals (children → child, people → person)
+- Preserves original casing
+- Smart about double letters (boss → boss, not bo)
 
-`quantify(value: number, unit: string, plural?: string)`
+**Examples:**
+- `"cities"` → `"city"`
+- `"boxes"` → `"box"`
+- `"children"` → `"child"`
+- `"APIs"` → `"API"`
 
-The value will be paired with the unit, either singular or plural form
+### `quantify(count: number | string, unit: string, plural?: string)`
+Formats a number with a unit, automatically pluralizing the unit based on the count.
 
-`singularize(input: string)`
+**Parameters:**
+- `count`: Number of units (number or string)
+- `unit`: Label for the singular unit
+- `plural`: Optional plural label (auto-generated if not provided)
 
-Converts a word to it's singular form if it is a plural. Removes the 's' from
-most words. Replacies 'ies' with 'y'. Removes 'es' from the end of a word.
-Handles special cases like 'child' and 'goose'.
+**Examples:**
+- `quantify(1, 'item')` → `"1 item"`
+- `quantify(3, 'box')` → `"3 boxes"`
+- `quantify(1, 'child', 'children')` → `"1 child"`
+- `quantify(2, 'child', 'children')` → `"2 children"`
 
-`snakify(input: string)`
+---
 
-Converted to snake_case: lower case, word boundaries replaced with underscores. 
+## 📚 Documentation
 
-`titalize(input: number)`
+See the full API documentation at [agape.dev/api](https://agape.dev/api).
 
-The first letter of each word is capitalized with the exception of
-`a, an, and, at, be, but, by, for, if, in, of, on, the, to` which are only 
-capitalized if they are the first word in the string, otherwise they 
-are converted to lowercase.
+## 📦 Agape Toolkit
 
-`verbalize(input: number)`
-
-First character capitalized, word boundaries replaced with spaces.
-
-
-## Author
-
-Maverik Minett  maverik.minett@gmail.com
-
-
-## Copyright
-
-© 2020-2025 Maverik Minett
-
-## License
-
-MIT
+This package is part of the [Agape Toolkit](https://github.com/AgapeToolkit/AgapeToolkit) - a comprehensive collection of TypeScript utilities and libraries for modern web development.
