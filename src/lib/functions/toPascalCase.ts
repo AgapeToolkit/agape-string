@@ -6,33 +6,33 @@
  *
  * @example
  * ```ts
- * pascalize("hello world"); // "HelloWorld"
+ * toPascalCase("hello world"); // "HelloWorld"
  * ```
  *
  * @example
  * ```ts
- * pascalize("first_name"); // "FirstName"
+ * toPascalCase("first_name"); // "FirstName"
  * ```
  *
  * @example
  * ```ts
- * pascalize("user42Profile"); // "User42Profile"
+ * toPascalCase("user42Profile"); // "User42Profile"
  * ```
  *
  * @example
  * ```ts
- * pascalize("API response code"); // "ApiResponseCode"
+ * toPascalCase("API response code"); // "ApiResponseCode"
  * ```
  *
  * @example
  * ```ts
- * pascalize("  messy__input--string  "); // "MessyInputString"
+ * toPascalCase("  messy__input--string  "); // "MessyInputString"
  * ```
  *
  * @param input A string to be returned in PascalCase.
  * @returns The PascalCased version of the input string.
  */
-export function pascalize(input: string): string {
+export function toPascalCase(input: string): string {
   const parts = input
     .replace(/[^A-Za-z0-9]+/g, ' ')
     .replace(/([0-9])([A-Za-z])/g, '$1 $2')     // digit → letter

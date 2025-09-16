@@ -9,38 +9,38 @@ import { PLACEHOLDER } from '../private/constants';
  *
  * @example
  * ```ts
- * verbalize("helloWorld"); // "Hello world"
+ * toWords("helloWorld"); // "Hello world"
  * ```
  *
  * @example
  * ```ts
- * verbalize("HTML5Parser"); // "HTML 5 parser"
+ * toWords("HTML5Parser"); // "HTML 5 parser"
  * ```
  *
  * @example
  * ```ts
- * verbalize("api_v2_response"); // "Api v2 response"
+ * toWords("api_v2_response"); // "Api v2 response"
  * ```
  *
  * @example
  * ```ts
- * verbalize("User-ID"); // "User ID"
+ * toWords("User-ID"); // "User ID"
  * ```
  *
  * @example
  * ```ts
- * verbalize("employeeV3Final"); // "Employee v3 final"
+ * toWords("employeeV3Final"); // "Employee v3 final"
  * ```
  *
  * @example
  * ```ts
- * verbalize("version_2_0_release"); // "Version 2 0 release"
+ * toWords("version_2_0_release"); // "Version 2 0 release"
  * ```
  *
  * @param input A string to be returned as spoken words.
  * @returns A natural-language version of the input identifier.
  */
-export function verbalize(input: string): string {
+export function toWords(input: string): string {
   const versionMatches: string[] = [];
 
   const preserved = input.replace(/(v\d+(\.\d+)*)(?=[^a-zA-Z0-9]|$)/gi, (_, match) => {

@@ -13,63 +13,63 @@ import { preserveCasing } from '../private/util';
  *
  * @example
  * ```ts
- * pluralize("city"); // "cities"
+ * toPlural("city"); // "cities"
  * ```
  *
  * @example
  * ```ts
- * pluralize("box"); // "boxes"
+ * toPlural("box"); // "boxes"
  * ```
  *
  * @example
  * ```ts
- * pluralize("child"); // "children"
+ * toPlural("child"); // "children"
  * ```
  *
  * @example
  * ```ts
- * pluralize("person"); // "people"
+ * toPlural("person"); // "people"
  * ```
  *
  * @example
  * ```ts
- * pluralize("API"); // "APIs"
+ * toPlural("API"); // "APIs"
  * ```
  *
  * @example
  * ```ts
- * pluralize("ID"); // "IDs"
+ * toPlural("ID"); // "IDs"
  * ```
  *
  * @example
  * ```ts
- * pluralize("File"); // "Files"
+ * toPlural("File"); // "Files"
  * ```
  *
  * @example
  * ```ts
- * pluralize("buzz"); // "buzzes"
+ * toPlural("buzz"); // "buzzes"
  * ```
  *
  * @example
  * ```ts
- * pluralize("CPU"); // "CPUs"
+ * toPlural("CPU"); // "CPUs"
  * ```
  *
  * @example
  * ```ts
- * pluralize("DOG"); // "DOGS"
+ * toPlural("DOG"); // "DOGS"
  * ```
  *
  * @example
  * ```ts
- * pluralize("A"); // "As"
+ * toPlural("A"); // "As"
  * ```
  *
  * @param word A singular word to be pluralized.
  * @returns The plural form of the input word.
  */
-export function pluralize(word: string): string {
+export function toPlural(word: string): string {
   if (word.length === 0) return '';
   const lower = word.toLowerCase();
 

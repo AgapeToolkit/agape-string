@@ -9,33 +9,33 @@ import { PLACEHOLDER } from '../private/constants';
  *
  * @example
  * ```ts
- * snakify("hello world"); // "hello_world"
+ * toSnakeCase("hello world"); // "hello_world"
  * ```
  *
  * @example
  * ```ts
- * snakify("UserProfileV2"); // "user_profile_v2"
+ * toSnakeCase("UserProfileV2"); // "user_profile_v2"
  * ```
  *
  * @example
  * ```ts
- * snakify("HTML5 Parser"); // "html_5_parser"
+ * toSnakeCase("HTML5 Parser"); // "html_5_parser"
  * ```
  *
  * @example
  * ```ts
- * snakify("  messy-input_string  "); // "messy_input_string"
+ * toSnakeCase("  messy-input_string  "); // "messy_input_string"
  * ```
  *
  * @example
  * ```ts
- * snakify("ReportV3Final"); // "report_v3_final"
+ * toSnakeCase("ReportV3Final"); // "report_v3_final"
  * ```
  *
  * @param input A string to be converted to snake_case.
  * @returns The snake_cased version of the input.
  */
-export function snakify(input: string): string {
+export function toSnakeCase(input: string): string {
   const versionMatches: string[] = [];
 
   // Step 1: replace version tokens (v2) with unique placeholders

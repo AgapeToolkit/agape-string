@@ -13,43 +13,43 @@ import { preserveCasing } from '../private/util';
  *
  * @example
  * ```ts
- * singularize("cities"); // "city"
+ * toSingular("cities"); // "city"
  * ```
  *
  * @example
  * ```ts
- * singularize("boxes"); // "box"
+ * toSingular("boxes"); // "box"
  * ```
  *
  * @example
  * ```ts
- * singularize("children"); // "child"
+ * toSingular("children"); // "child"
  * ```
  *
  * @example
  * ```ts
- * singularize("teeth"); // "tooth"
+ * toSingular("teeth"); // "tooth"
  * ```
  *
  * @example
  * ```ts
- * singularize("dogs"); // "dog"
+ * toSingular("dogs"); // "dog"
  * ```
  *
  * @example
  * ```ts
- * singularize("BUZZES"); // "BUZZ"
+ * toSingular("BUZZES"); // "BUZZ"
  * ```
  *
  * @example
  * ```ts
- * singularize("IDs"); // "ID"
+ * toSingular("IDs"); // "ID"
  * ```
  *
  * @param word Plural word to be converted to singular.
  * @returns The singular form of the input word.
  */
-export function singularize(word: string): string {
+export function toSingular(word: string): string {
   const lower = word.toLowerCase();
 
   const irregulars: Record<string, string> = {
