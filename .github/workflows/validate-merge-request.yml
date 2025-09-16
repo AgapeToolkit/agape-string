@@ -1,11 +1,14 @@
-name: Validate @agape/string in monorepo context
+name: Validate @agape/string
 
 on:
   pull_request:
 
 jobs:
   test:
+    name: Unit Tests
     runs-on: ubuntu-latest
+    env:
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
     steps:
       - name: Checkout agape-string (this repo)
@@ -53,7 +56,7 @@ jobs:
             fi
           '
 
-      - name: Replace string code in monorepo
+      - name: Replace library code in monorepo
         run: |
           rm -rf ../AgapeToolkit/libs/string
           cp -r . ../AgapeToolkit/libs/string
